@@ -1,10 +1,10 @@
-# NetAegis — n8n notification contract
+# OQVIAN NetAegis — n8n notification contract
 
 **Owner:** brother's n8n workflows and eventual WhatsApp, SMS, and email delivery.
 **Contract:** `contracts/n8n-notification-event.schema.json` (JSON Schema draft 2020-12, version 1.0.0).
-**Planned direction:** NetAegis backend → protected n8n webhook. This document defines a future interface; the current backend does not call n8n.
+**Planned direction:** OQVIAN NetAegis backend → protected n8n webhook. This document defines a future interface; the current backend does not call n8n.
 
-This document lets the n8n side be built independently of the NetAegis backend. The current demo records a local synthetic workflow event only; it does not send a webhook or contact n8n. No real WhatsApp, SMS, or email is sent, and no provider credentials are required.
+This document lets the n8n side be built independently of the OQVIAN NetAegis backend. The current demo records a local synthetic workflow event only; it does not send a webhook or contact n8n. No real WhatsApp, SMS, or email is sent, and no provider credentials are required.
 
 ## 1. Event payload
 
@@ -13,7 +13,7 @@ When a backend-to-n8n adapter is implemented, it will POST the JSON object descr
 | Field | Meaning |
 |---|---|
 | event_id | UUID uniquely identifying this notification event. |
-| incident_id | NetAegis incident id, e.g. `NET-1042`. |
+| incident_id | OQVIAN NetAegis incident id, e.g. `NET-1042`. |
 | event_version | Schema version, currently `1.0.0`. Reject unknown versions. |
 | source_mode | `synthetic-fixture` (demo) or `wazuh-lab` (future isolated lab). |
 | synthetic | Always `true` in the public demo. |
@@ -89,7 +89,7 @@ These are distinct and MUST be reported separately:
 - **Acknowledgement (n8n receipt):** `202 Accepted` once n8n has validated, deduplicated, and queued the event. It means n8n received it, not that any provider delivered it.
 - **Provider delivery status:** for a future n8n implementation, outcome of the channel send. Record as `pending`, `delivered`, `failed`, or `suppressed` per event, with a timestamp and reason for failures. The current demo has no provider delivery status.
 
-Future HTTP response contract (not implemented by the current NetAegis backend):
+Future HTTP response contract (not implemented by the current OQVIAN NetAegis backend):
 
 | Status | Meaning |
 |---|---|
@@ -111,7 +111,7 @@ n8n must record both `acknowledged_at` (receipt time) and `delivery_status`/`del
 
 ## 7. Simulated-only public demo behavior
 
-- The current NetAegis backend runs in `simulated-only` mode. Its local simulation constructs an event with `notification_policy.channel: "simulated"`, records it in demo state, and returns it to the dashboard. It does not call an n8n webhook.
+- The current OQVIAN NetAegis backend runs in `simulated-only` mode. Its local simulation constructs an event with `notification_policy.channel: "simulated"`, records it in demo state, and returns it to the dashboard. It does not call an n8n webhook.
 - When a separate n8n workflow is built, its public demo mode should validate synthetic events and record simulated status locally. It must not send real WhatsApp, SMS, or email.
 - The current dashboard reports only that a local simulation was recorded. It does not show provider delivery status because no provider or n8n connection exists.
 - Nothing in this demo implies real delivery, real channels, or production readiness.
@@ -137,4 +137,4 @@ n8n must record both `acknowledged_at` (receipt time) and `delivery_status`/`del
 
 ## 10. What this demo does NOT claim
 
-No real provider integration, no real messages, no credentials, no production monitoring, no guaranteed delivery, and no compliance certification. The current NetAegis API does not contact n8n; the local simulation is only a recorded fake event. The brother's separate workflow is planned work.
+No real provider integration, no real messages, no credentials, no production monitoring, no guaranteed delivery, and no compliance certification. The current OQVIAN NetAegis API does not contact n8n; the local simulation is only a recorded fake event. The brother's separate workflow is planned work.

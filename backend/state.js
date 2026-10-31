@@ -1,5 +1,5 @@
 /*
- * NetAegis backend — demo operator state store.
+ * OQVIAN NetAegis backend — demo operator state store.
  *
  * Holds acknowledgement, note and simulated-workflow state for incidents
  * in memory. Operator actions persist only for the process lifetime by

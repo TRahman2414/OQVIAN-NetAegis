@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * NetAegis — synthetic demo backend API (slice 1, fixture-only).
+ * OQVIAN NetAegis — synthetic demo backend API (slice 1, fixture-only).
  *
  * A small, dependency-free local demo server that serves the root dashboard
  * assets and a JSON API for fictional incident fixtures. It uses the ROOT
@@ -259,7 +259,7 @@ function handleHealth(res) {
   sendJson(res, 200, {
     status: "ok",
     demo: true,
-    service: "NetAegis synthetic demo API",
+    service: "OQVIAN NetAegis synthetic demo API",
     sourceMode: config.sourceMode,
     startedAt: startedAt.toISOString(),
     uptimeSeconds: Math.round((Date.now() - startedAt.getTime()) / 1000),
@@ -502,7 +502,7 @@ function route(req, res) {
   if (pathname === "/api") {
     if (!requireMethod(method, "GET", res)) return;
     return sendJson(res, 200, {
-      service: "NetAegis synthetic demo API",
+      service: "OQVIAN NetAegis synthetic demo API",
       demo: true,
       schema: "Root dashboard incident schema (NET-#### ids; Identity/Configuration/Endpoint; New/In review/Resolved) + n8n contract v1.0.0 alignment",
       dashboard: "GET / and /index.html (root dashboard), /styles.css, /app.js",
@@ -522,7 +522,7 @@ function route(req, res) {
     });
   }
 
-  sendJson(res, 404, { error: "not_found", detail: "Unknown path for the NetAegis demo API." });
+  sendJson(res, 404, { error: "not_found", detail: "Unknown path for the OQVIAN NetAegis demo API." });
 }
 
 function requireMethod(actual, allowed, res) {

@@ -1,5 +1,5 @@
 /*
- * NetAegis synthetic multi-server inventory for the public demo.
+ * OQVIAN NetAegis synthetic multi-server inventory for the public demo.
  * These are fictional Wazuh-agent examples, not connected hosts.
  * The array has no product-side item limit; deployment capacity is defined
  * by the customer's Wazuh infrastructure and model-serving resources.

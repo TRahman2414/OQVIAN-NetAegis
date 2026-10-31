@@ -1,4 +1,4 @@
-# NetAegis
+# OQVIAN NetAegis
 
 A self-hosted ISP security operations demo combining Wazuh, a custom dashboard and a local model integration.
 
@@ -18,4 +18,4 @@ Open <http://127.0.0.1:4173>. Stop the server with Ctrl+C. The UI and API use th
 
 ## Planned system
 
-The next phases will add a verified read-only Wazuh adapter that can represent a growing Wazuh-agent fleet, plus a connector for the single trained local model integrated with NetAegis. The product will expose a connection option, not a model/provider picker. Practical server capacity depends on the customer deployment's resources. Notification workflows are documented in [docs/n8n-contract.md](docs/n8n-contract.md) for separate n8n implementation. Public demo mode will continue to use synthetic data, and notification actions remain simulated. See the [master plan](MASTER_PLAN.md) for architecture, role boundaries and acceptance criteria.
+The next phases will add a verified read-only Wazuh adapter that can represent a growing Wazuh-agent fleet, plus a connector for the single trained local model integrated with OQVIAN NetAegis. The product will expose a connection option, not a model/provider picker. Practical server capacity depends on the customer deployment's resources. Notification workflows are documented in [docs/n8n-contract.md](docs/n8n-contract.md) for separate n8n implementation. Public demo mode will continue to use synthetic data, and notification actions remain simulated. See the [master plan](MASTER_PLAN.md) for architecture, role boundaries and acceptance criteria.

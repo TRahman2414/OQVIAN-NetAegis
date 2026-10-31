@@ -1,5 +1,5 @@
 /*
- * NetAegis backend — adapter seam.
+ * OQVIAN NetAegis backend — adapter seam.
  *
  * This module is the REPLACEMENT SEAM for later phases. It defines the
  * contract future adapters must implement, and exports deliberately
@@ -7,7 +7,7 @@
  * truthfully ("not connected") without any network behavior.
  *
  * Contract for future adapters (read-only Wazuh indexer, the single
- * NetAegis-integrated local model runtime, notification workflow client):
+ * OQVIAN NetAegis-integrated local model runtime, notification workflow client):
  *
  *   createAdapter(config) -> {
  *     name:         string,                 // stable identifier, e.g. 'wazuh-indexer'
@@ -34,7 +34,7 @@
 
 class AdapterUnavailableError extends Error {
   constructor(adapterName) {
-    super(`Adapter '${adapterName}' is disabled in the NetAegis demo slice (not connected; no live integration exists yet).`);
+    super(`Adapter '${adapterName}' is disabled in the OQVIAN NetAegis demo slice (not connected; no live integration exists yet).`);
     this.name = "AdapterUnavailableError";
     this.adapterName = adapterName;
   }
@@ -68,7 +68,7 @@ function createWazuhAdapter() {
 }
 
 /*
- * NetAegis-integrated local model adapter. Disabled stub until the agreed
+ * OQVIAN NetAegis-integrated local model adapter. Disabled stub until the agreed
  * runtime is packaged. It exposes no provider/model picker. The adapter must
  * bound and sanitize input, treat evidence as untrusted, validate structured output,
  * labeled fallback when the model is down. None of that is here yet.

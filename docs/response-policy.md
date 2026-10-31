@@ -1,4 +1,4 @@
-# NetAegis guarded response policy
+# OQVIAN NetAegis guarded response policy
 
 **Current implementation:** policy preview only. The public demo does not execute actions, connect to Wazuh, call the local model, or send n8n messages.
 
@@ -36,10 +36,10 @@ policy-engine errors fail closed. Preserve evidence and audit records.
 Immediately escalate Critical/High severity, uncertain findings, repeated
 failures, failed remediation, or actions outside a pre-approved policy. The
 future backend will hand an event to the n8n contract and notify the
-customer-authorized recipients and the NetAegis system owner. Recipient lists
+customer-authorized recipients and the OQVIAN NetAegis system owner. Recipient lists
 must be configured per customer; never hard-code contact details. Record
 acknowledgement separately from provider delivery status. If n8n is unavailable,
-keep the incident visible in NetAegis and mark escalation delivery as failed or
+keep the incident visible in OQVIAN NetAegis and mark escalation delivery as failed or
 pending for retry; do not claim a message was sent.
 
 ## Required controls before enabling execution

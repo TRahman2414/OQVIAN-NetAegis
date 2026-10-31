@@ -1,5 +1,5 @@
 /*
- * NetAegis backend demo fixtures.
+ * OQVIAN NetAegis backend demo fixtures.
  *
  * SCHEMA COMPATIBILITY (per coordinator alignment, 31 Oct 2026):
  * the canonical active UI is the ROOT dashboard (app.js/index.html), whose
@@ -129,7 +129,7 @@ const SERVICE_STATUS = [
     detail: "Demo — simulated only. simulate-workflow records a local synthetic event shaped per contracts/n8n-notification-event.schema.json. No real WhatsApp, SMS, or email is or can be sent.",
   },
   {
-    name: "NetAegis demo API itself",
+    name: "OQVIAN NetAegis demo API itself",
     state: "demo-local",
     detail: "Local fixture-only API bound to the loopback interface by default. Not a monitoring service and not reachable by design beyond this machine's own loopback.",
   },

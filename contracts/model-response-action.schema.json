@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://netaegis.example/contracts/model-response-action/v1/schema.json",
-  "title": "NetAegis bounded model response request",
+  "title": "OQVIAN NetAegis bounded model response request",
   "description": "A model may request only a named, server-side allowlisted action. This contract cannot express shell commands or destructive actions.",
   "type": "object",
   "additionalProperties": false,

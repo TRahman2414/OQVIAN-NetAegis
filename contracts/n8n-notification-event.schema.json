@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://netaegis.example/contracts/n8n-notification-event/v1/schema.json",
-  "title": "NetAegis synthetic backend-to-n8n notification event",
-  "description": "Versioned event published by the NetAegis demo backend to the brother's n8n workflow. Synthetic demo data only; no real provider payloads, secrets, or live customer data.",
+  "title": "OQVIAN NetAegis synthetic backend-to-n8n notification event",
+  "description": "Versioned event published by the OQVIAN NetAegis demo backend to the brother's n8n workflow. Synthetic demo data only; no real provider payloads, secrets, or live customer data.",
   "version": "1.0.0",
   "type": "object",
   "additionalProperties": false,
@@ -30,7 +30,7 @@
     "incident_id": {
       "type": "string",
       "pattern": "^NET-\\d{4}$",
-      "description": "Stable NetAegis incident identifier the notification refers to. Correlates with the demo incident queue and audit trail."
+      "description": "Stable OQVIAN NetAegis incident identifier the notification refers to. Correlates with the demo incident queue and audit trail."
     },
     "event_version": {
       "type": "string",
