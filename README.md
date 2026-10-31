@@ -6,6 +6,10 @@ A self-hosted ISP security operations demo combining Wazuh, a custom dashboard a
 
 The demo also shows the planned guarded response-tool policy. Its versioned catalog is limited to named actions; destructive actions and arbitrary commands are excluded. Real remediation execution and n8n escalation are not enabled in this demo. See [docs/response-policy.md](docs/response-policy.md).
 
+## Deployment and support model
+
+The intended customer deployment is local-first: the dashboard, backend, Wazuh, integrated model runtime, and n8n workflow run on customer-controlled infrastructure. Routine monitoring data and model inputs stay within the customer environment; the product has no planned cloud control plane or automatic telemetry upload. An optional monthly remote support session is planned for system health audits and authorized repairs. Each session must be explicitly approved by the customer, limited in time and scope, revocable, and recorded in a customer-visible audit log. No always-on remote access is planned. These integrations and controls are not implemented by this synthetic demo. See [docs/deployment-and-support.md](docs/deployment-and-support.md).
+
 ## Run the dashboard preview
 
 Requires Node.js 18+. From this directory, run:

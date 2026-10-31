@@ -18,6 +18,7 @@ The user's responsibility covers Wazuh integration, dashboard, backend, and the 
 5. **Dashboard:** overview with actual calculated counts, recent alerts, timeline and service health; searchable/filterable incident queue; evidence, provenance and activity detail; model findings with uncertainty; acknowledgement and notes; notification preview and simulated delivery status. Always show demo/synthetic mode. Use fictional assets and documentation IP addresses.
 6. **Notification boundary:** publish a versioned, authenticated backend-to-n8n event contract. Demo sends only synthetic events to a mock/simulated workflow; no real WhatsApp, SMS or email by default. Keep delivery provider and workflow logic outside the core. See brother's work below.
 7. **Packaging:** Compose-based local startup, loopback-bound interfaces, scoped demo reset, versioned fixture data, configuration examples, license inventory, health checks, quick start, screenshots or recorded walkthrough, and clear GitHub documentation. Avoid committing secrets, real logs, or model weights without distribution rights. Exact languages and versions are selected after compatibility and hardware checks.
+8. **Local deployment and remote support:** Run the customer dashboard, backend, Wazuh, model runtime, and n8n on customer-controlled infrastructure. Do not require a cloud control plane or send routine telemetry/customer event data off-site. Offer optional monthly remote audits and repairs only through a customer-approved, customer-revocable, time-limited support session with least-privilege access, a defined scope, and a customer-visible audit record. Keep audit exports local unless the customer explicitly approves specific redacted data sharing. No persistent unattended access. The public demo only describes this plan; it does not establish a remote tunnel or perform support actions.
 
 ## Delivery phases
 
@@ -60,6 +61,7 @@ Readiness at planning time: Terra audit completed; OpenCode responded and confir
 - Model output identifies model and time, separates facts from interpretations, references available evidence, handles untrusted input, and never runs actions. Automatic candidate alerts are clearly marked and do not claim certainty.
 - The workflow stub enforces authentication, schema and idempotency, shows simulated results, and tolerates n8n unavailability. No provider credentials are required for the demo.
 - If Wazuh lab is delivered, demonstrate a real test event end-to-end with provenance; otherwise clearly mark the integration as unfinished.
+- The local install continues to operate without an OQVIAN cloud dependency. Remote support remains off until the customer approves a scoped, expiring session; session start, actions, and end are visible in the customer's audit record, and access can be revoked.
 - Verify startup/reset, unavailable services, duplicate requests, model failures, basic accessibility, dependency licenses, no secrets in Git, and measured local resource needs. Record results and limitations.
 
 ## Before customer implementation
