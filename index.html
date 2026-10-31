@@ -20,6 +20,7 @@
         <a class="nav-item active" href="#overview" aria-label="Overview"><span class="nav-icon" aria-hidden="true">◫</span><span class="nav-label">Overview</span></a>
         <a class="nav-item" href="#incidents" aria-label="Incidents"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Incidents</span><span class="nav-count" id="nav-count">0</span></a>
         <a class="nav-item" href="#assets" aria-label="Assets"><span class="nav-icon" aria-hidden="true">⌘</span><span class="nav-label">Assets</span></a>
+        <a class="nav-item" href="#servers" aria-label="Servers"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Servers</span></a>
         <a class="nav-item" href="#activity" aria-label="Activity"><span class="nav-icon" aria-hidden="true">⌁</span><span class="nav-label">Activity</span></a>
       </nav>
       <div class="sidebar-bottom">
@@ -63,11 +64,18 @@
           </section>
         </div>
 
+        <section class="panel servers-panel" id="servers">
+          <div class="panel-header"><div><div class="panel-title-row"><h2>Servers &amp; agents</h2><span class="preview-chip" id="server-count">03 demo servers</span></div><p>Enroll server hosts through Wazuh. The local model is designed to analyze alerts across the connected fleet.</p></div><button class="button button-secondary" id="connect-server" aria-describedby="server-connect-note">Connect a server</button></div>
+          <div class="server-capacity-note" id="server-connect-note"><strong>Designed for a growing fleet.</strong> There is no fixed server-count limit in this dashboard. Actual capacity depends on the customer's Wazuh deployment, hardware, and model throughput. This preview does not enroll or monitor real hosts.</div>
+          <div class="table-wrap server-table-wrap"><table class="server-table"><thead><tr><th>SERVER</th><th>PLATFORM</th><th>DEMO SITE</th><th>WAZUH AGENT</th><th>MODEL ANALYSIS</th><th>LAST EVENT</th></tr></thead><tbody id="server-rows"></tbody></table></div>
+          <div class="panel-footer"><span>Fictional server inventory · no customer hosts connected</span><span class="fixture-note">Alert analysis is a planned integration</span></div>
+        </section>
+
         <section class="panel systems-panel" id="assets">
           <div class="panel-header"><div><div class="panel-title-row"><h2>Connected services</h2><span class="preview-chip">Preview state</span></div><p>Integration status for this local interface preview.</p></div><button class="text-button" id="service-info">About integrations <span>↗</span></button></div>
           <div class="service-grid">
             <article class="service-card"><span class="service-icon service-wazuh">W</span><div class="service-copy"><strong>Wazuh</strong><span>Alert source</span></div><span class="service-state"><i></i> Not connected</span><p>Fixture data is shown in place of a Wazuh lab connection.</p></article>
-            <article class="service-card"><span class="service-icon service-model">✳</span><div class="service-copy"><strong>Local model</strong><span>Incident analysis</span></div><span class="service-state state-neutral"><i></i> Preview only</span><p>Sample summaries illustrate the planned model panel.</p></article>
+            <article class="service-card"><span class="service-icon service-model">✳</span><div class="service-copy"><strong>Bring your local model</strong><span>Analyze alerts across the server fleet</span></div><span class="service-state state-neutral"><i></i> Adapter planned</span><p>Connect your trained model through a local API. This demo uses sample summaries only.</p></article>
             <article class="service-card"><span class="service-icon service-flow">↗</span><div class="service-copy"><strong>Workflow service</strong><span>Notifications</span></div><span class="service-state state-neutral"><i></i> Simulated</span><p>Workflow actions are recorded in this local demo only; no messages are sent.</p></article>
           </div>
         </section>

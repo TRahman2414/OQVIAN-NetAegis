@@ -48,6 +48,7 @@ const {
 } = require("./fixtures");
 const { createAppState } = require("./state");
 const { createAdapters } = require("./adapters");
+const { SERVERS } = require("./servers");
 
 /* ---------- configuration (env only, loopback-only defaults) ---------- */
 
@@ -286,6 +287,7 @@ function handleConfig(res) {
     },
     counts: {
       incidents: INCIDENTS.length,
+      servers: SERVERS.length,
       bySeverity: countBy(INCIDENTS.map((i) => i.severity)),
       byCategory: countBy(INCIDENTS.map((i) => i.category)),
     },
@@ -324,6 +326,16 @@ function handleListIncidents(query, res) {
     total: items.length,
     fixturesTotal: INCIDENTS.length,
     incidents: items.map(listShape),
+  });
+}
+
+function handleListServers(res) {
+  sendJson(res, 200, {
+    demo: true,
+    sourceMode: config.sourceMode,
+    total: SERVERS.length,
+    servers: SERVERS.map((server) => ({ ...server })),
+    disclaimer: "Fictional server fixtures only. No hosts are enrolled, monitored, or analyzed by a model.",
   });
 }
 
@@ -439,6 +451,11 @@ function route(req, res) {
     return handleListIncidents(url.searchParams, res);
   }
 
+  if (pathname === "/api/servers") {
+    if (!requireMethod(method, "GET", res)) return;
+    return handleListServers(res);
+  }
+
   if (pathname === "/api/demo/reset") {
     if (!requireMethod(method, "POST", res)) return;
     if (!requireSameOriginJson(req, res)) return;
@@ -479,6 +496,7 @@ function route(req, res) {
         "GET  /health",
         "GET  /api/config",
         "GET  /api/incidents?severity=&category=&status=&q=   (Title Case severity; root category labels; status New/In review/Resolved; q searches id/title/asset/category/site like the root UI)",
+        "GET  /api/servers                           (fictional Wazuh-agent inventory; no real hosts connected)",
         "GET  /api/incidents/:id",
         "POST /api/incidents/:id/ack               body optional: {\"status\": \"New\"|\"In review\"|\"Resolved\"} (default advances the root cycle New -> In review -> Resolved -> In review)",
         "POST /api/incidents/:id/note              body: {\"text\": \"...\"}",

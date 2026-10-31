@@ -61,6 +61,9 @@ function createWazuhAdapter() {
     fetchEvents() {
       throw new AdapterUnavailableError(this.name);
     },
+    listAgents() {
+      throw new AdapterUnavailableError(this.name);
+    },
   };
 }
 

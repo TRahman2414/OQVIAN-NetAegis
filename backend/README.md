@@ -74,8 +74,9 @@ keys for any external system, and must not gain any without review.
 | GET | `/styles.css`, `/app.js` | — | Allowlisted root dashboard assets only. No directory listing or arbitrary file serving. |
 | GET | `/api` | — | API endpoint index + demo disclaimer + served schema description. |
 | GET | `/health` | — | Demo status + per-service states (all `not-connected` / `simulated-only` / `demo-local`). |
-| GET | `/api/config` | — | Loopback config, fixture counts, root schema value sets, n8n contract enums, adapter states. |
+| GET | `/api/config` | — | Loopback config, incident/server fixture counts, root schema value sets, n8n contract enums, adapter states. |
 | GET | `/api/incidents` | — | Fixture incident list (root schema). Query params: `severity` (`Critical`/`High`/`Medium` Title Case), `category` (`Identity`/`Configuration`/`Endpoint`), `status` (`New`/`In review`/`Resolved`), `q` — text search over exactly the root UI's fields `id, title, asset, category, site`. Ordered smallest `offset` first (matches root "recent" ordering). |
+| GET | `/api/servers` | — | Fictional multi-server/Wazuh-agent inventory for the demo. It has no product-side count cap; real deployment scale depends on Wazuh, storage, event volume, and model-serving resources. No real hosts are enrolled in this slice. |
 | GET | `/api/incidents/:id` | — | Full incident detail (root schema + additive demo fields, see above). |
 | POST | `/api/incidents/:id/ack` | optional `{"status": "New"\|"In review"\|"Resolved"}` | Default advances the root dashboard's acknowledge cycle `New → In review → Resolved → In review`. Local state only. |
 | POST | `/api/incidents/:id/note` | `{"text": "..."}` (≤2000 chars) | Save an operator note (root `note` field). Local state only. |
@@ -88,8 +89,10 @@ Errors are JSON: `not_found`, `bad_request`, `method_not_allowed` (405),
 ## Adapter seam (for later phases)
 
 `backend/adapters.js` defines the replacement contract for the planned
-**read-only Wazuh indexer adapter** and **local-model (Ollama-compatible)
-adapter**, plus the **notification workflow client** boundary. The exported
+**read-only Wazuh adapter** (including multi-agent inventory and alert
+source attribution) and **local-model adapter** (for the customer's own
+trained model exposed through an Ollama-compatible local API), plus the
+**notification workflow client** boundary. The exported
 stubs are disabled: calling any operation throws `AdapterUnavailableError`, and
 `/health` lists them all as `not-connected`. Enabling real adapters later
 requires the planned restrictions to be implemented first — least-privilege
