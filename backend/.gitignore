@@ -1,0 +1,5 @@
+# NetAegis backend — local files not for commit
+# Optional operator state mirror (contains only demo acks/notes, but is
+# per-operator local data and can churn; keep it out of version control).
+demo-state.json
+demo-state.json.tmp
