@@ -53,6 +53,7 @@ tbody tr.is-selected{background:var(--blue-soft)}
 .model-preview-pill{background:#f3f0fb;color:#74669a}
 .server-event{color:#65758a}
 .service-response{background:#eaf4f2;color:#347b69}
+.service-connect-button{width:100%;margin-top:8px;padding:6px 8px;font-size:10px}
 .response-policy .panel-title-row{margin-bottom:7px}
 .response-policy .panel-title-row h3{margin:0}
 .response-policy-grid{display:grid;gap:8px;margin:12px 0}

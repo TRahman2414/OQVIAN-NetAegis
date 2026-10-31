@@ -54,11 +54,12 @@ $("#incident-search").addEventListener("input",render);$("#severity-filter").add
 $(".close-drawer").addEventListener("click",closeDetails);$("#drawer-backdrop").addEventListener("click",closeDetails);document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#detail-drawer").inert){closeDetails();return}if(e.key!=="Tab"||$("#detail-drawer").inert)return;const focusable=[...$("#detail-drawer").querySelectorAll('button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);if(!focusable.length){e.preventDefault();return}const first=focusable[0],last=focusable.at(-1);if(!$("#detail-drawer").contains(document.activeElement)){e.preventDefault();first.focus()}else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
 $("#reset-demo").addEventListener("click",async()=>{if(apiAvailable){try{await apiRequest("/api/demo/reset",{method:"POST",body:JSON.stringify({})})}catch(error){notify(`Backend did not reset the demo: ${error.message}`);return}}incidents=structuredClone(seedIncidents);try{localStorage.removeItem(storageKey)}catch{}closeDetails();$("#incident-search").value="";$("#severity-filter").value="all";$("#status-filter").value="all";if(apiAvailable)await loadFromApi();else render();notify("Demo session reset to its starting state.")});
 $("#view-all").addEventListener("click",()=>{$("#incident-search").value="";$("#severity-filter").value="all";$("#status-filter").value="all";render();$("#incident-search").focus()});
-$("#service-info").addEventListener("click",()=>notify("Integration cards show preview states; no services are connected."));
+$("#service-info").addEventListener("click",()=>notify("Integration cards show preview states; no services are connected."));$("#connect-model").addEventListener("click",()=>notify("Preview only: NetAegis will connect its integrated local model. No model/provider selection is offered in this demo."));
 $("#connect-server").addEventListener("click",()=>notify("Server enrollment is a preview. Customer servers will connect through Wazuh agents; no host is contacted here."));
 function syncNavigation(){const current=location.hash||"#overview";document.querySelectorAll(".nav-item").forEach(item=>{const active=item.getAttribute("href")===current;item.classList.toggle("active",active);if(active)item.setAttribute("aria-current","page");else item.removeAttribute("aria-current")})}
 window.addEventListener("hashchange",syncNavigation);syncNavigation();
 loadFromApi();
+
 
 
 

@@ -91,8 +91,8 @@ Errors are JSON: `not_found`, `bad_request`, `method_not_allowed` (405),
 
 `backend/adapters.js` defines the replacement contract for the planned
 **read-only Wazuh adapter** (including multi-agent inventory and alert
-source attribution) and **local-model adapter** (for the customer's own
-trained model exposed through an Ollama-compatible local API), plus the
+source attribution) and **local-model adapter** (for the single model
+integrated with NetAegis through its internal local runtime), plus the
 **notification workflow client** and **guarded response-action** boundaries.
 The response-action catalog is available from `GET /api/response-tools`, but
 its executor is disabled and has no delete, wipe, removal, or arbitrary-command

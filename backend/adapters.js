@@ -6,8 +6,8 @@
  * disabled stub objects so the demo slice can describe its own state
  * truthfully ("not connected") without any network behavior.
  *
- * Contract for future adapters (read-only Wazuh indexer, local model via
- * an Ollama-compatible endpoint, notification workflow client):
+ * Contract for future adapters (read-only Wazuh indexer, the single
+ * NetAegis-integrated local model runtime, notification workflow client):
  *
  *   createAdapter(config) -> {
  *     name:         string,                 // stable identifier, e.g. 'wazuh-indexer'
@@ -68,9 +68,9 @@ function createWazuhAdapter() {
 }
 
 /*
- * Local model adapter (future, Ollama-compatible endpoint). Disabled stub.
- * When implemented: configurable model identifier, bounded/sanitized
- * input, evidence treated as untrusted, structured-output validation,
+ * NetAegis-integrated local model adapter. Disabled stub until the agreed
+ * runtime is packaged. It exposes no provider/model picker. The adapter must
+ * bound and sanitize input, treat evidence as untrusted, validate structured output,
  * labeled fallback when the model is down. None of that is here yet.
  */
 function createModelAdapter() {
@@ -83,7 +83,6 @@ function createModelAdapter() {
         state: this.status,
         detail: "Demo — not connected. Incident 'AI summaries' served by the API are pre-written fixture text, not model output.",
         enabled: false,
-        model: null,
       };
     },
     summarize() {
