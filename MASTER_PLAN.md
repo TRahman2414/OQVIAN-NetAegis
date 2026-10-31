@@ -54,6 +54,7 @@ Readiness at planning time: Terra audit completed; OpenCode responded and confir
 
 - A documented clean start opens a synthetic dashboard locally, with three repeatable scenarios and an isolated reset; no real external messages are sent.
 - A server inventory can display a growing Wazuh-managed fleet without a hard-coded UI count limit; each host shows agent health, last event, and whether model analysis is available. Public demo rows stay explicitly fictional.
+- The local model receives only a versioned, allowlisted response-tool catalog. It cannot delete data, logs, servers, or agent records, wipe storage, or issue arbitrary commands. Critical/high, uncertain, repeated-failure, and failed-remediation cases escalate to customer-authorized contacts and the NetAegis owner through n8n.
 - Counts, filters, timestamps, source mode, evidence and actions match known fixtures. Operator acknowledgement and notes persist until reset.
 - New or changed incidents generate background processing jobs; jobs survive restart and do not duplicate, with observable pending, success, error and stale states. The dashboard continues to work if the model is down.
 - Model output identifies model and time, separates facts from interpretations, references available evidence, handles untrusted input, and never runs actions. Automatic candidate alerts are clearly marked and do not claim certainty.
@@ -100,3 +101,5 @@ This update supersedes the earlier planning-only readiness notes above. The owne
 The product still uses synthetic fixtures only. Wazuh, the local model, and real n8n/provider delivery are not connected. The model adapter is a disabled seam; no live monitoring or alerting capability is claimed. The local demo startup command is `node backend/server.js`.
 
 The first slice is now available at `http://127.0.0.1:4173` in the local demo environment. Terra's audit findings were incorporated: API failures remain visible, stale drawer requests cannot update the wrong incident, workflow simulations return the same stored event on duplicate requests, loopback origin checks accept configured loopback addresses, and focus stays within the open drawer. The browser confirms the local API is connected. No automated tests were added or run.
+
+The next UI slice adds a guarded response-policy preview and versioned model action request contract. It explicitly blocks deletion, wipe, server/agent removal, and arbitrary commands; severe, uncertain, repeated-failure, and failed-remediation cases are designed to escalate through the future n8n integration to customer-authorized recipients and the NetAegis owner. The demo exposes a catalog only: it has no action executor and sends no alerts.

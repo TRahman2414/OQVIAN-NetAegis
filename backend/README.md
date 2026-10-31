@@ -77,6 +77,7 @@ keys for any external system, and must not gain any without review.
 | GET | `/api/config` | — | Loopback config, incident/server fixture counts, root schema value sets, n8n contract enums, adapter states. |
 | GET | `/api/incidents` | — | Fixture incident list (root schema). Query params: `severity` (`Critical`/`High`/`Medium` Title Case), `category` (`Identity`/`Configuration`/`Endpoint`), `status` (`New`/`In review`/`Resolved`), `q` — text search over exactly the root UI's fields `id, title, asset, category, site`. Ordered smallest `offset` first (matches root "recent" ordering). |
 | GET | `/api/servers` | — | Fictional multi-server/Wazuh-agent inventory for the demo. It has no product-side count cap; real deployment scale depends on Wazuh, storage, event volume, and model-serving resources. No real hosts are enrolled in this slice. |
+| GET | `/api/response-tools` | — | Non-executable allowlist and escalation policy. No remediation action is run by this demo. |
 | GET | `/api/incidents/:id` | — | Full incident detail (root schema + additive demo fields, see above). |
 | POST | `/api/incidents/:id/ack` | optional `{"status": "New"\|"In review"\|"Resolved"}` | Default advances the root dashboard's acknowledge cycle `New → In review → Resolved → In review`. Local state only. |
 | POST | `/api/incidents/:id/note` | `{"text": "..."}` (≤2000 chars) | Save an operator note (root `note` field). Local state only. |
@@ -92,14 +93,19 @@ Errors are JSON: `not_found`, `bad_request`, `method_not_allowed` (405),
 **read-only Wazuh adapter** (including multi-agent inventory and alert
 source attribution) and **local-model adapter** (for the customer's own
 trained model exposed through an Ollama-compatible local API), plus the
-**notification workflow client** boundary. The exported
-stubs are disabled: calling any operation throws `AdapterUnavailableError`, and
-`/health` lists them all as `not-connected`. Enabling real adapters later
+**notification workflow client** and **guarded response-action** boundaries.
+The response-action catalog is available from `GET /api/response-tools`, but
+its executor is disabled and has no delete, wipe, removal, or arbitrary-command
+operation. Calling a disabled operation throws `AdapterUnavailableError`;
+`/health` reports the Wazuh and model adapters as `not-connected`, with the
+workflow and response catalog as `simulated-only`. Enabling real adapters later
 requires the planned restrictions to be implemented first — least-privilege
 read-only Wazuh account, validated TLS, bounded/sanitized inputs, evidence
 treated as untrusted, structured-output validation, labeled model fallbacks,
-and the versioned authenticated workflow contract in `docs/n8n-contract.md`.
-None of that exists here.
+tenant-specific authorization, audit logging, human escalation, and the
+versioned authenticated workflow contract in `docs/n8n-contract.md`. None of
+the live integrations or remediation execution exists here. See
+`docs/response-policy.md` for the proposed gates.
 
 ## Known limitations of this slice
 

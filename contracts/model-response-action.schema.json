@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://netaegis.example/contracts/model-response-action/v1/schema.json",
+  "title": "NetAegis bounded model response request",
+  "description": "A model may request only a named, server-side allowlisted action. This contract cannot express shell commands or destructive actions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action_id", "target", "confidence", "rationale", "evidence_references"],
+  "properties": {
+    "action_id": {
+      "type": "string",
+      "enum": [
+        "collect_diagnostics",
+        "retry_agent_connection",
+        "restart_approved_service",
+        "restore_approved_config"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent_id"],
+      "properties": {
+        "agent_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,64}$" },
+        "service_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,64}$" },
+        "snapshot_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,64}$" }
+      }
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "rationale": { "type": "string", "minLength": 1, "maxLength": 1200 },
+    "evidence_references": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "action_id": { "const": "restart_approved_service" } }, "required": ["action_id"] },
+      "then": { "properties": { "target": { "required": ["agent_id", "service_id"] } } }
+    },
+    {
+      "if": { "properties": { "action_id": { "const": "restore_approved_config" } }, "required": ["action_id"] },
+      "then": { "properties": { "target": { "required": ["agent_id", "snapshot_id"] } } }
+    }
+  ]
+}

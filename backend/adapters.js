@@ -115,6 +115,47 @@ function createWorkflowAdapter() {
   };
 }
 
+/*
+ * Bounded model-to-remediation boundary. The future model may request only
+ * named tools from this catalog; it never receives shell or arbitrary API
+ * access. This demo exposes the catalog but deliberately cannot execute it.
+ */
+const RESPONSE_ACTIONS = [
+  { id: "collect_diagnostics", risk: "read-only", autoEligible: true },
+  { id: "retry_agent_connection", risk: "low", autoEligible: true },
+  { id: "restart_approved_service", risk: "moderate", autoEligible: false, requiresTenantAllowlist: true },
+  { id: "restore_approved_config", risk: "moderate", autoEligible: false, requiresKnownGoodSnapshot: true },
+];
+
+const PROHIBITED_RESPONSE_ACTIONS = [
+  "delete_data",
+  "delete_logs",
+  "remove_server",
+  "remove_agent",
+  "wipe_disk",
+  "run_arbitrary_command",
+];
+
+function createResponseActionAdapter() {
+  return {
+    name: "safe-response-tools",
+    status: "simulated-only",
+    describe() {
+      return {
+        name: this.name,
+        state: this.status,
+        enabled: false,
+        actions: RESPONSE_ACTIONS.map((action) => ({ ...action })),
+        prohibitedActions: [...PROHIBITED_RESPONSE_ACTIONS],
+        detail: "Demo policy catalog only. No server action executes; destructive actions and arbitrary commands are not available.",
+      };
+    },
+    execute() {
+      throw new AdapterUnavailableError(this.name);
+    },
+  };
+}
+
 module.exports = {
   AdapterUnavailableError,
   createAdapters() {
@@ -122,6 +163,7 @@ module.exports = {
       wazuh: createWazuhAdapter(),
       model: createModelAdapter(),
       workflow: createWorkflowAdapter(),
+      response: createResponseActionAdapter(),
     };
   },
 };

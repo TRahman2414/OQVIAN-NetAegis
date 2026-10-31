@@ -52,5 +52,17 @@ tbody tr.is-selected{background:var(--blue-soft)}
 .server-state-pill{display:inline-flex;border-radius:5px;padding:4px 7px;background:#f1f3f6;color:#626f80;font-size:10px;font-weight:600;white-space:nowrap}
 .model-preview-pill{background:#f3f0fb;color:#74669a}
 .server-event{color:#65758a}
+.service-response{background:#eaf4f2;color:#347b69}
+.response-policy .panel-title-row{margin-bottom:7px}
+.response-policy .panel-title-row h3{margin:0}
+.response-policy-grid{display:grid;gap:8px;margin:12px 0}
+.response-policy-card{display:grid;gap:3px;padding:9px 10px;border:1px solid #e7edf4;border-radius:7px;background:#f8fafc}
+.response-policy-card strong{font-size:10px;color:#3d5069}
+.response-policy-card span{font-size:10px;color:#68788d;line-height:1.5}
+.response-escalation{background:#fff8ef;border-color:#f1dec2}
+.response-escalation strong{color:#8b5b1d}
+.response-blocked{padding:9px;background:#fff4f2;border:1px solid #f0d1cb;border-radius:7px;color:#84544e!important}
+.response-blocked strong{color:#863d35}
+.response-preview-result{display:block;margin-top:8px;color:#3d6f5f;font-size:10px;line-height:1.5}
 @media(max-width:820px){.servers-panel .panel-header{align-items:flex-start}.server-capacity-note{margin:0 12px 12px}}
 @media(max-width:520px){.servers-panel .panel-header{flex-direction:column}.servers-panel .panel-header .button{align-self:flex-start}.servers-panel .panel-footer{align-items:flex-start;flex-direction:column}.server-capacity-note{font-size:10px}}

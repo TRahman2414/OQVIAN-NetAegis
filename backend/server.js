@@ -456,6 +456,20 @@ function route(req, res) {
     return handleListServers(res);
   }
 
+  if (pathname === "/api/response-tools") {
+    if (!requireMethod(method, "GET", res)) return;
+    return sendJson(res, 200, {
+      demo: true,
+      mode: "catalog-only",
+      ...adapters.response.describe(),
+      escalation: {
+        humanReviewRequired: ["Critical", "High", "uncertain", "repeated-failure"],
+        channel: "n8n-contract-preview",
+        recipients: "customer-authorized-contacts-and-system-owner",
+      },
+    });
+  }
+
   if (pathname === "/api/demo/reset") {
     if (!requireMethod(method, "POST", res)) return;
     if (!requireSameOriginJson(req, res)) return;
@@ -497,6 +511,7 @@ function route(req, res) {
         "GET  /api/config",
         "GET  /api/incidents?severity=&category=&status=&q=   (Title Case severity; root category labels; status New/In review/Resolved; q searches id/title/asset/category/site like the root UI)",
         "GET  /api/servers                           (fictional Wazuh-agent inventory; no real hosts connected)",
+        "GET  /api/response-tools                    (non-executable model action catalog and escalation policy)",
         "GET  /api/incidents/:id",
         "POST /api/incidents/:id/ack               body optional: {\"status\": \"New\"|\"In review\"|\"Resolved\"} (default advances the root cycle New -> In review -> Resolved -> In review)",
         "POST /api/incidents/:id/note              body: {\"text\": \"...\"}",

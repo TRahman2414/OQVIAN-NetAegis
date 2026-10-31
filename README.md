@@ -4,6 +4,8 @@ A self-hosted ISP security operations demo combining Wazuh, a custom dashboard a
 
 **Current status:** the first local dashboard and fixture-only backend slice is running, including a multi-server inventory preview. Dashboard actions use the backend when available; incidents, server entries and workflow actions remain synthetic and simulated. The n8n event contract is documented for the separate workflow build. Wazuh, the local model and real notification workflows are not connected; this demo does not monitor networks or send messages.
 
+The demo also shows the planned guarded response-tool policy. Its versioned catalog is limited to named actions; destructive actions and arbitrary commands are excluded. Real remediation execution and n8n escalation are not enabled in this demo. See [docs/response-policy.md](docs/response-policy.md).
+
 ## Run the dashboard preview
 
 Requires Node.js 18+. From this directory, run:
