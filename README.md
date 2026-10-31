@@ -1,18 +1,25 @@
-# NetAegis
+# OQVIAN NetAegis
 
-A planned, self-hosted security operations demo combining Wazuh with a custom dashboard, backend, and local AI integration.
+A self-hosted ISP security operations demo combining Wazuh, a custom dashboard and a local model integration.
 
-**Status: planning.** The application has not been built yet. This repository does not currently provide a working demo or production security monitoring.
+**Current status:** the first local dashboard and fixture-only backend slice is running, including a multi-server inventory preview. Dashboard actions use the backend when available; incidents, server entries and workflow actions remain synthetic and simulated. The n8n event contract is documented for the separate workflow build. Wazuh, the local model and real notification workflows are not connected; this demo does not monitor networks or send messages.
 
-## Planned demo
+The demo also shows the planned guarded response-tool policy. Its versioned catalog is limited to named actions; destructive actions and arbitrary commands are excluded. Real remediation execution and n8n escalation are not enabled in this demo. See [docs/response-policy.md](docs/response-policy.md).
 
-- Fictional security incidents, an incident queue, evidence, and analyst actions.
-- A separate read-only integration with an isolated Wazuh lab, subject to hardware and validation.
-- A local model interface for background incident analysis, with clear provenance, uncertainty, and service health.
-- A separate n8n integration for simulated notification workflows. Real WhatsApp, SMS, and email delivery are future customer-specific work.
+## Deployment and support model
 
-The demo is intended to be adapted for individual organizations after discovery and validation. No production readiness, detection coverage, or continuous availability is claimed.
+The intended customer deployment is local-first: the dashboard, backend, Wazuh, integrated model runtime, and n8n workflow run on customer-controlled infrastructure. Routine monitoring data and model inputs stay within the customer environment; the product has no planned cloud control plane or automatic telemetry upload. An optional monthly remote support session is planned for system health audits and authorized repairs. Each session must be explicitly approved by the customer, limited in time and scope, revocable, and recorded in a customer-visible audit log. No always-on remote access is planned. These integrations and controls are not implemented by this synthetic demo. See [docs/deployment-and-support.md](docs/deployment-and-support.md).
 
-## Collaboration
+## Run the dashboard preview
 
-Contributors can develop changes on branches and open pull requests for review. Implementation and setup instructions will be added as the project is built.
+Requires Node.js 18+. From this directory, run:
+
+```bash
+node backend/server.js
+```
+
+Open <http://127.0.0.1:4173>. Stop the server with Ctrl+C. The UI and API use the same loopback origin. Incident actions are stored by the local demo process; restart the server or use **Reset demo** to restore fixture state. This is synthetic demo data only.
+
+## Planned system
+
+The next phases will add a verified read-only Wazuh adapter that can represent a growing Wazuh-agent fleet, plus a connector for the single trained local model integrated with OQVIAN NetAegis. The product will expose a connection option, not a model/provider picker. Practical server capacity depends on the customer deployment's resources. Notification workflows are documented in [docs/n8n-contract.md](docs/n8n-contract.md) for separate n8n implementation. Public demo mode will continue to use synthetic data, and notification actions remain simulated. See the [master plan](MASTER_PLAN.md) for architecture, role boundaries and acceptance criteria.

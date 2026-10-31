@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fa">
+  <meta name="description" content="OQVIAN NetAegis synthetic security operations dashboard demo">
+  <title>OQVIAN NetAegis · Security Operations Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell" inert>
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="OQVIAN NetAegis overview">
+        <span class="brand-mark" aria-hidden="true">O</span>
+        <span><strong>OQVIAN NetAegis</strong><small>SECURITY OPERATIONS</small></span>
+      </a>
+      <div class="workspace-pill"><span class="pulse-dot"></span> Demo workspace</div>
+      <nav class="nav-list">
+        <a class="nav-item active" href="#overview" aria-label="Overview"><span class="nav-icon" aria-hidden="true">◫</span><span class="nav-label">Overview</span></a>
+        <a class="nav-item" href="#incidents" aria-label="Incidents"><span class="nav-icon" aria-hidden="true">◇</span><span class="nav-label">Incidents</span><span class="nav-count" id="nav-count">0</span></a>
+        <a class="nav-item" href="#assets" aria-label="Assets"><span class="nav-icon" aria-hidden="true">⌘</span><span class="nav-label">Assets</span></a>
+        <a class="nav-item" href="#servers" aria-label="Servers"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">Servers</span></a>
+        <a class="nav-item" href="#activity" aria-label="Activity"><span class="nav-icon" aria-hidden="true">⌁</span><span class="nav-label">Activity</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-label">DEMO ENVIRONMENT</div>
+        <div class="workspace-row"><span class="workspace-avatar">NA</span><span><strong>Fictional ISP</strong><small>Local preview</small></span><span class="more">···</span></div>
+        <div class="sidebar-foot"><span class="tiny-dot"></span> No live integrations connected</div>
+      </div>
+    </aside>
+
+    <main id="overview" class="main-area">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div>
+        <div class="top-actions"><span class="last-refresh"><span class="refresh-dot"></span> Demo data · just now</span><button class="icon-button" aria-label="Help" title="Help">?</button><div class="user-chip"><span class="user-avatar">DA</span><span><strong>Demo analyst</strong><small>Viewer</small></span><span class="chevron">⌄</span></div></div>
+      </header>
+
+      <section class="content">
+        <div class="demo-banner"><span class="banner-icon">i</span><div><strong>DEMO · SYNTHETIC DATA</strong><span>Fictional incidents for product demonstration. No customer or production data is connected.</span></div><span class="banner-tag" id="backend-mode" role="status" aria-live="polite" data-mode="connecting">CONNECTING LOCAL API…</span></div>
+
+        <div class="page-heading"><div><div class="eyebrow">SECURITY OPERATIONS</div><h1>Good afternoon, analyst</h1><p>Here’s the current picture across your demo environment.</p></div><button class="button button-secondary" id="reset-demo"><span>↻</span> Reset demo</button></div>
+
+        <section class="stat-grid" aria-label="Incident summary">
+          <article class="stat-card"><div class="stat-top"><span>Open incidents</span><span class="stat-icon icon-blue">▤</span></div><div class="stat-value" id="stat-open">0</div><div class="stat-foot">Across all demo scenarios</div><div class="stat-accent accent-blue"></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Critical</span><span class="stat-icon icon-red">!</span></div><div class="stat-value" id="stat-critical">0</div><div class="stat-foot"><span class="status-dot red"></span> Needs analyst attention</div><div class="stat-accent accent-red"></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Under review</span><span class="stat-icon icon-amber">◷</span></div><div class="stat-value" id="stat-review">0</div><div class="stat-foot">Marked for review locally</div><div class="stat-accent accent-amber"></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Demo scenarios</span><span class="stat-icon icon-teal">⌘</span></div><div class="stat-value">03</div><div class="stat-foot">Curated fictional scenarios</div><div class="stat-accent accent-teal"></div></article>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel incident-panel" id="incidents">
+            <div class="panel-header"><div><div class="panel-title-row"><h2>Recent incidents</h2><span class="live-label"><span class="tiny-dot"></span> Demo feed</span></div><p>Review evidence from the fictional event set.</p></div><button class="text-button" id="view-all">View all <span>→</span></button></div>
+            <div class="filters"><label class="search-box"><span aria-hidden="true">⌕</span><input id="incident-search" type="search" placeholder="Search incidents..." aria-label="Search incidents"></label><select id="severity-filter" aria-label="Filter by severity"><option value="all">All severity</option><option value="Critical">Critical</option><option value="High">High</option><option value="Medium">Medium</option></select><select id="status-filter" aria-label="Filter by status"><option value="all">All status</option><option value="New">New</option><option value="In review">In review</option><option value="Resolved">Resolved</option></select></div>
+            <div class="table-wrap"><table><thead><tr><th>INCIDENT</th><th>SEVERITY</th><th>DEMO ASSET</th><th>OCCURRED</th><th>STATUS</th><th><span class="sr-only">Open incident</span></th></tr></thead><tbody id="incident-rows"></tbody></table><div class="empty-state" id="empty-state" hidden>No incidents match those filters.</div></div>
+            <div class="panel-footer"><span id="result-count">Showing 0 incidents</span><span class="fixture-note"><span class="tiny-dot"></span> Fixture events · not live detections</span></div>
+          </section>
+
+          <section class="panel activity-panel" id="activity">
+            <div class="panel-header"><div><h2>Activity overview</h2><p>Illustrative event volume by severity.</p></div><span class="period-select">Last 24 hours <span>⌄</span></span></div>
+            <div class="chart-summary"><span><i class="legend-dot legend-red"></i>Critical</span><span><i class="legend-dot legend-amber"></i>High</span><span><i class="legend-dot legend-blue"></i>Medium</span></div>
+            <div class="chart" role="img" aria-label="Illustrative synthetic event volume chart"><div class="y-labels"><span>12</span><span>8</span><span>4</span><span>0</span></div><div class="chart-body"><div class="grid-lines"><i></i><i></i><i></i><i></i></div><div class="bars" id="chart-bars"></div><div class="x-labels"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>Now</span></div></div></div>
+            <div class="chart-disclaimer"><span>i</span> Visual sample based on demo fixtures</div>
+          </section>
+        </div>
+
+        <section class="panel servers-panel" id="servers">
+          <div class="panel-header"><div><div class="panel-title-row"><h2>Servers &amp; agents</h2><span class="preview-chip" id="server-count">03 demo servers</span></div><p>Enroll server hosts through Wazuh. The local model is designed to analyze alerts across the connected fleet.</p></div><button class="button button-secondary" id="connect-server" aria-describedby="server-connect-note">Connect a server</button></div>
+          <div class="server-capacity-note" id="server-connect-note"><strong>Designed for a growing fleet.</strong> There is no fixed server-count limit in this dashboard. Actual capacity depends on the customer's Wazuh deployment, hardware, and model throughput. This preview does not enroll or monitor real hosts.</div>
+          <div class="table-wrap server-table-wrap"><table class="server-table"><thead><tr><th>SERVER</th><th>PLATFORM</th><th>DEMO SITE</th><th>WAZUH AGENT</th><th>MODEL ANALYSIS</th><th>LAST EVENT</th></tr></thead><tbody id="server-rows"></tbody></table></div>
+          <div class="panel-footer"><span>Fictional server inventory · no customer hosts connected</span><span class="fixture-note">Alert analysis is a planned integration</span></div>
+        </section>
+
+        <section class="panel systems-panel" id="assets">
+          <div class="panel-header"><div><div class="panel-title-row"><h2>Connected services</h2><span class="preview-chip">Preview state</span></div><p>Integration status for this local interface preview.</p></div><button class="text-button" id="service-info">About integrations <span>↗</span></button></div>
+          <div class="service-grid">
+            <article class="service-card"><span class="service-icon service-local">⌂</span><div class="service-copy"><strong>Customer-hosted deployment</strong><span>Local-first architecture</span></div><span class="service-state state-neutral"><i></i> Planned</span><p>Dashboard, Wazuh, model runtime, and workflow are designed to run on customer-controlled infrastructure. The demo uses fictional local fixtures.</p></article>
+            <article class="service-card"><span class="service-icon service-support">↔</span><div class="service-copy"><strong>Monthly remote support</strong><span>Optional maintenance access</span></div><span class="service-state state-neutral"><i></i> Not connected</span><p>Customer-approved, time-limited audit and repair sessions; access is scoped and logged. No always-on support connection or routine cloud telemetry.</p></article>
+            <article class="service-card"><span class="service-icon service-wazuh">W</span><div class="service-copy"><strong>Wazuh</strong><span>Alert source</span></div><span class="service-state"><i></i> Not connected</span><p>Fixture data is shown in place of a Wazuh lab connection.</p></article>
+            <article class="service-card"><span class="service-icon service-model">✳</span><div class="service-copy"><strong>Local model connection</strong><span>Analyze alerts across the server fleet</span></div><span class="service-state state-neutral"><i></i> Not connected</span><p>Uses the model integrated with OQVIAN NetAegis. This demo uses sample summaries only.</p><button class="button button-secondary service-connect-button" id="connect-model" type="button">Configure connection</button></article>
+            <article class="service-card"><span class="service-icon service-flow">↗</span><div class="service-copy"><strong>Workflow service</strong><span>Notifications</span></div><span class="service-state state-neutral"><i></i> Simulated</span><p>Workflow actions are recorded in this local demo only; no messages are sent.</p></article>
+            <article class="service-card"><span class="service-icon service-response">✓</span><div class="service-copy"><strong>Safe response</strong><span>Model tool policy</span></div><span class="service-state state-neutral"><i></i> Preview only</span><p>Allowlisted actions only; deletion and arbitrary commands are blocked.</p></article>
+          </div>
+        </section>
+        <footer class="page-footer"><span>OQVIAN NetAegis <span class="footer-dot">·</span> UI preview</span><span>All names and events shown are fictional.</span><a href="https://github.com/TRahman2414/OQVIAN-NetAegis" target="_blank" rel="noreferrer">Project repository ↗</a></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="detail-drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true" inert>
+    <div class="drawer-header"><div><span class="eyebrow">INCIDENT DETAIL</span><h2 id="drawer-title">Incident</h2></div><button class="icon-button close-drawer" aria-label="Close incident details">×</button></div>
+    <div id="drawer-content"></div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
